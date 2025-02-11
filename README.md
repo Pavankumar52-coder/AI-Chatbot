@@ -1,150 +1,91 @@
-# PGAG
-Chatbot demo link using LOOM:https://www.loom.com/share/6d60b536d80d4a7f8fa1e5837a733dfa?sid=e9695d4b-8fc2-4926-8b19-aa07d1de9306
+# TalentScout Hiring Assistant Chatbot
 
-📌 Intelligent Hiring Assistant
+## 📌 Project Overview
+The **Hiring Assistant Chatbot** is an AI-powered tool designed to streamline the initial screening process for technical job applicants whether thay are freshers or experienced. It helps recruiters gather candidate details, generate relevant technical interview questions, and conduct real-time chatbot-based conversations. The chatbot is powered by Google's **Gemini AI** and provides a structured & interactive experience for candidates throughout the screening process.
 
-📝 Project Overview
+## 🛠️ Installation Instructions
+Follow these steps to set up and run the application locally:
 
-The Intelligent Hiring Assistant is a chatbot designed to streamline the interview process by generating tailored technical interview questions, allowing candidates to input their answers, and performing sentiment analysis to assess responses. The chatbot also provides basic resume analysis and ensures data privacy through encryption.
+### 1️⃣ **Clone the Repository**
+```bash
+git clone https://github.com/your-repo/hiring-assistant-chatbot.git
+cd hiring-assistant-chatbot
+```
 
-⚡ Features
-
-📄 Resume Text Extraction (PDF support)
-
-🤖 AI-powered Interview Question Generation
-
-📝 Candidate Answer Collection
-
-📊 Sentiment Analysis of Responses
-
-🔐 Data Encryption for Privacy Protection
-
-🚀 User-Friendly Streamlit Interface
-
-📥 Installation Instructions
-
-🔧 Prerequisites
-
-Ensure you have the following installed:
-
-Python 3.8+
-
-pip (Python package manager)
-
-🛠️ Setup Steps
-
-Clone the Repository:
-
-git clone https://github.com/your-repo/hiring-assistant.git
-cd hiring-assistant
-
-Create a Virtual Environment:
-
+### 2️⃣ **Create a Virtual Environment (Optional but Recommended)**
+```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
+```
 
-Install Required Dependencies:
-
+### 3️⃣ **Install Dependencies**
+```bash
 pip install -r requirements.txt
+```
 
-Set Up API Keys:
+### 4️⃣ **Set Up API Keys**
+- Create a `.env` file in the project root and add the following:
+  ```env
+  GEMINI_API_KEY=your_google_gemini_api_key
+  ```
+- Replace `your_google_gemini_api_key` with your actual API key.
 
-Obtain a Hugging Face API key from Hugging Face.
-
-Replace the placeholder key in app.py:
-
-HF_HEADERS = {"Authorization": "Bearer YOUR_HUGGINGFACE_API_KEY"}
-
-Run the Application:
-
+### 5️⃣ **Run the Application**
+```bash
 streamlit run app.py
+```
+This will start a local Streamlit server, and the chatbot will be accessible via web browser.
 
-🎯 Usage Guide
+## 📖 Usage Guide
+1️⃣ Open the Streamlit app in your browser.
+2️⃣ Enter your personal details (Name, Email, Experience, Tech Stack, etc.).
+3️⃣ Click **"Generate Questions"** to receive 3-5 technical interview questions based on your tech stack.
+4️⃣ Answer the questions and submit them for review.
+5️⃣ Interact with the AI chatbot in real-time for any additional inquiries.
 
-Start the application by running streamlit run app.py.
+## ⚙️ Technical Details
+- **Frontend & UI**: Built using **Streamlit** for an interactive and user-friendly experience.
+- **AI Model**: Utilizes **Google Gemini AI** (`gemini-pro`) for NLP-based responses.
+- **Data Processing**: User inputs are sanitized and structured for accurate responses.
+- **Backend**: Pure Python with a minimalistic approach to ensure smooth execution.
+- **Privacy**: Used cryptography to secure the candidates details.
 
-Fill out the candidate details (Name, Email, Experience, Tech Stack, etc.).
+### 📚 Libraries Used
+- `streamlit` → UI framework
+- `google-generativeai` → API wrapper for Gemini AI
+- `cryptography` → Security and Privacy
 
-Upload a PDF resume (optional) for text extraction.
+## 📝 Prompt Design
+The chatbot uses carefully structured prompts to ensure precise and engaging interactions:
+1️⃣ **Technical Question Generation**:
+   ```text
+   Generates exactly 3 to 5 concise technical interview questions based on the candidate tech stack.
+   Ensure the response is a numbered list with one question per line. Keep questions short and relevant.
+   ```
+2️⃣ **Chatbot Responses**:
+   ```text
+   Act as an AI interview assistant. Respond concisely to: {user_input}.
+   ```
+   - Ensures the chatbot remains on-topic and professional.
+   - Allows for open-ended yet structured responses.
 
-Get AI-generated technical interview questions.
+## 🔥 Challenges & Solutions
+### 🛑 **Challenge: Generating high-quality technical questions**
+**Solution:** Iteratively refined the prompt to enforce concise, numbered responses and prevent generic questions.
 
-Provide answers in separate text areas.
+### 🛑 **Challenge: Maintaining real-time chat behavior in Streamlit**
+**Solution:** Used `st.session_state` to persist chat history and dynamically update messages without page refresh.
 
-Analyze sentiment of responses using AI.
+### 🛑 **Challenge: Ensuring user-friendly UI and clear interactions**
+**Solution:** Implemented visually distinct chat bubbles, structured form inputs, and logical question-answer flows.
 
-Review the analysis and insights.
+## 🎯 Future Enhancements
+- ✅ Add integration with ATS (Applicant Tracking Systems)
+- ✅ Implement audio-based Q&A for verbal technical interviews
+- ✅ Implement coding type technical questions.
 
-🏗️ Technical Details
-
-📚 Libraries Used
-
-Streamlit (User Interface)
-
-Requests (API calls)
-
-Fitz (PyMuPDF) (PDF Text Extraction)
-
-Cryptography (Fernet) (Encryption)
-
-Hugging Face Transformers (AI Processing)
-
-🏛️ Architectural Decisions
-
-Why Streamlit? Quick prototyping, interactive UI, and lightweight.
-
-Why Hugging Face? Free-tier model access, scalable inference API.
-
-Why Encryption? To ensure candidate privacy and security.
-
-✍️ Prompt Design
-
-Information Gathering: The AI receives candidate details and crafts specific technical interview questions.
-
-Question Generation: The AI is prompted to generate tailored interview questions based on experience, tech stack, and role.
-
-Sentiment Analysis: The AI assesses positivity, confidence, and technical depth in candidate responses.
-
-Example prompt:
-
-Generate 3 technical interview questions for a [Experience] years experienced candidate applying for [Position] skilled in [Tech Stack].
-
-🛠️ Challenges & Solutions
-
-🚧 Challenges Faced
-
-Question Format Issues:
-
-AI sometimes returned questions in a block of text.
-
-Solution: Used .split('\n') to structure output.
-
-Editable Question Boxes:
-
-Questions appeared in text areas, making them editable.
-
-Solution: Replaced with st.markdown() for readonly display.
-
-API Rate Limits:
-
-Hugging Face API had request limits.
-
-Solution: Cached API responses where possible.
-
-Data Privacy Concerns:
-
-Candidate details needed protection.
-
-Solution: Implemented Fernet encryption before storing data.
-
-📜 License
-
-This project is open-source under the MIT License.
-
-👥 Contributors
-
+---
+contributed by,
 Pavankumar T
 
-💬 Have Feedback or Questions?
-
-Feel free to open an issue or contribute to the repository!
+**📢 Developed with ❤️ to simplify hiring and enhance candidate experience! 🚀**
