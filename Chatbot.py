@@ -38,7 +38,7 @@ def generate_questions(tech_stack):
 # Function to generate chatbot response dynamically
 def chatbot_response(user_input):
     if user_input.lower() in ["stop", "exit", "quit"]:
-        return "Thank you for your time! We'll be in touch soon. 😊"
+        return "Thank you for your time! We'll be in touch soon..."
 
     prompt = f"Act as an AI interview assistant. Respond concisely to: {user_input}"
     response = genai.GenerativeModel("gemini-pro").generate_content(prompt)
@@ -72,8 +72,8 @@ st.markdown(
 )
 
 # Greeting
-st.markdown('<p class="title">🤖 TalentScout Recruitment Chatbot</p>', unsafe_allow_html=True)
-st.markdown("👋 **Hello! Let's start your interview process.**")
+st.markdown('<p class="title">Smart Recruitment Chatbot</p>', unsafe_allow_html=True)
+st.markdown("**Hello! Let's start your interview process.**")
 st.write("Please provide your details to proceed with the interview.")
 
 # Collect Candidate Details
@@ -101,7 +101,7 @@ if st.button("Generate Questions"):
                 answers[f"answer_{i}"] = st.text_area(f"Answer {i}", key=f"answer_{i}")
             
             if st.button("Submit Answers"):
-                st.success("Your responses have been submitted successfully! ✅")
+                st.success("Your responses have been submitted successfully!")
         else:
             st.warning("Could not generate questions. Please try again.")
     else:
@@ -109,7 +109,7 @@ if st.button("Generate Questions"):
 
 # Chatbot Section
 st.markdown("---")
-st.markdown('<p class="subtitle">💬 Chat with AI Assistant</p>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">Chat with AI Assistant</p>', unsafe_allow_html=True)
 
 if "chat_history" not in st.session_state:
     st.session_state["chat_history"] = []
@@ -129,4 +129,4 @@ for sender, message in st.session_state["chat_history"]:
         st.markdown(f'<div class="bot-response"><strong>{sender}:</strong> {message}</div>', unsafe_allow_html=True)
 
 st.markdown("---")
-st.markdown("⚠️ **Data Privacy & Compliance**: This chatbot follows GDPR compliance by not storing any real candidate data.")
+st.markdown("**Data Privacy & Compliance**: This chatbot follows GDPR compliance by not storing any real candidate data.")
